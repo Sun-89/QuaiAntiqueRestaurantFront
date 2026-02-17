@@ -17,3 +17,13 @@ main{
     bottom: 0;
     width: 100%;
 }
+
+p{ 
+    font-family: $font-family-serif;
+    font-size: 18px;
+}
+
+.hero-scene{
+    background-image: url(../images/FondHeroScene.jpg);
+    background-size: cover;
+}
