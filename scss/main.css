@@ -11986,7 +11986,7 @@ html {
 }
 
 main {
-  margin-bottom: 233px;
+  margin-bottom: 250px;
 }
 
 .footer.footer {
@@ -12003,6 +12003,7 @@ p {
 
 .hero-scene {
   position: relative;
+  margin-bottom: 15px;
 }
 .hero-scene::before {
   content: "";
@@ -12026,6 +12027,10 @@ p {
   justify-content: center;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 .image-card {
   position: relative;
 }
@@ -12046,4 +12051,8 @@ p {
   opacity: 0;
   transition: all 0.3s;
   color: white;
+}
+
+.form-label {
+  color: #906427;
 }/*# sourceMappingURL=main.css.map */
