@@ -12,19 +12,29 @@
         <div class="col-12 col-md-4">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
+                    <div class="action-image-buttons" data-show="admin">
+                    <button  type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPlatModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePlatModal" data-nom="Soupe de poisson"><i class="bi bi-trash"></i></button>
+                    
+                    </div>
                     <h5 class="card-title">Soupe de poisson</h5>
                     <p class="card-text">Soupe maison avec croûtons et rouille.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">12 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">12 €</div>
             </div>
         </div>
         <div class="col-12 col-md-4">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
+                    <div class="action-image-buttons" data-show="admin">
+                    <button  type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPlatModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePlatModal" data-nom="Soupe de poisson"><i class="bi bi-trash"></i></button>
+                    
+                    </div>
                     <h5 class="card-title">Foie gras maison</h5>
                     <p class="card-text">Foie gras de canard, chutney de figues et brioche toastée.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">18 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">18 €</div>
             </div>
         </div>
         <div class="col-12 col-md-4">
@@ -33,7 +43,7 @@
                     <h5 class="card-title">Tartare de saumon</h5>
                     <p class="card-text">Saumon frais, avocat, citron vert et herbes fraîches.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">15 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">15 €</div>
             </div>
         </div>
     </div>
@@ -47,7 +57,7 @@
                     <h5 class="card-title">Magret de canard</h5>
                     <p class="card-text">Magret sauce aux cèpes, légumes de saison.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">28 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">28 €</div>
             </div>
         </div>
         <div class="col-12 col-md-4">
@@ -56,7 +66,7 @@
                     <h5 class="card-title">Filet de bar</h5>
                     <p class="card-text">Filet de bar poêlé, beurre blanc et légumes vapeur.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">26 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">26 €</div>
             </div>
         </div>
         <div class="col-12 col-md-4">
@@ -65,7 +75,7 @@
                     <h5 class="card-title">Côte de bœuf</h5>
                     <p class="card-text">Côte de bœuf maturée, frites maison et sauce béarnaise.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">35 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">35 €</div>
             </div>
         </div>
     </div>
@@ -79,7 +89,7 @@
                     <h5 class="card-title">Fondant au chocolat</h5>
                     <p class="card-text">Fondant maison, boule de glace vanille.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">9 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">9 €</div>
             </div>
         </div>
         <div class="col-12 col-md-4">
@@ -88,7 +98,7 @@
                     <h5 class="card-title">Crème brûlée</h5>
                     <p class="card-text">Crème brûlée à la vanille de Madagascar.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">8 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">8 €</div>
             </div>
         </div>
         <div class="col-12 col-md-4">
@@ -97,7 +107,7 @@
                     <h5 class="card-title">Tarte Tatin</h5>
                     <p class="card-text">Tarte Tatin maison, crème fraîche épaisse.</p>
                 </div>
-                <div class="card-footer text-end fw-bold">9 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">9 €</div>
             </div>
         </div>
     </div>
@@ -117,7 +127,7 @@
                         <li>Filet de bar <em>ou</em> Magret de canard</li>
                     </ul>
                 </div>
-                <div class="card-footer text-end fw-bold">35 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">35 €</div>
             </div>
         </div>
         <div class="col-12 col-md-6">
@@ -133,9 +143,60 @@
                         <li>Fondant au chocolat <em>ou</em> Crème brûlée</li>
                     </ul>
                 </div>
-                <div class="card-footer text-end fw-bold">55 €</div>
+                <div class="card-footer text-end fw-bold" id="Prix">55 €</div>
             </div>
         </div>
     </div>
 
+</div>
+
+<!-- Modal Edition-->
+<div class="modal fade" id="EditionPlatModal" tabindex="-1" aria-labelledby="EditionPlatModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="EditionPlatModalLabel">Édition plat</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="mb-3">
+            <label for="NameInputPlat" class="form-label">titre</label>
+            <input type="text" class="form-control" id="NameInputPlat" placeholder="lasagne à la bolognaise">
+        </div>
+        <div class="mb-3">
+            <label for="Prix" class="form-label">Prix</label>
+            <input type="text" class="form-control" id="Prix" placeholder="€">
+        </div>
+
+        <div class="text-center">
+        <button type="button" class="btn btn-primary">Enregistrer</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Suppression-->
+<div class="modal fade" id="DeletePlatModal" tabindex="-1" aria-labelledby="DeletePlatModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="DeletePlatModalLabel">Etes vous sur de vouloir supprimer ce plat ?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <p><strong id="nomPlatASupprimer"></strong></p>
+            </div>
+            <div class="text-center">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

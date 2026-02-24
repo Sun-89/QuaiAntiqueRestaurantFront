@@ -2,7 +2,7 @@ import Route from "./Route.js";
 import { allRoutes, websiteName } from "./allRoutes.js";
 
 // Création d'une route pour la page 404 (page introuvable)
-const route404 = new Route("404", "Page introuvable", "/pages/404.html");
+const route404 = new Route("404", "Page introuvable", "/pages/404.html",[]);
 
 // Fonction pour récupérer la route correspondant à une URL donnée
 const getRouteByUrl = (url) => {
@@ -23,27 +23,48 @@ const getRouteByUrl = (url) => {
 
 // Fonction pour charger le contenu de la page
 const LoadContentPage = async () => {
-  const path = window.location.pathname;
-  // Récupération de l'URL actuelle
-  const actualRoute = getRouteByUrl(path);
-  // Récupération du contenu HTML de la route
-  const html = await fetch(actualRoute.pathHtml).then((data) => data.text());
-  // Ajout du contenu HTML à l'élément avec l'ID "main-page"
-  document.getElementById("main-page").innerHTML = html;
+    const loader = document.getElementById("loader")
+    
+    try {
+        const path = window.location.pathname;
+        const actualRoute = getRouteByUrl(path);
+        const allRolesArray = actualRoute.authorize;
 
-  // Ajout du contenu JavaScript
-  if (actualRoute.pathJS != "") {
-    // Création d'une balise script
-    var scriptTag = document.createElement("script");
-    scriptTag.setAttribute("type", "text/javascript");
-    scriptTag.setAttribute("src", actualRoute.pathJS);
+        if(allRolesArray.length > 0){
+            if(allRolesArray.includes("disconnected")){
+                if(isConnected()){
+                    loader.classList.add("hidden") // ✅ cacher avant redirect
+                    window.location.replace("/");
+                    return // ✅ stopper l'exécution
+                }
+            } else {
+                const roleUser = getRole();
+                if(!allRolesArray.includes(roleUser)){
+                    loader.classList.add("hidden") // ✅ cacher avant redirect
+                    window.location.replace("/");
+                    return // ✅ stopper l'exécution
+                }
+            }
+        }
 
-    // Ajout de la balise script au corps du document
-    document.querySelector("body").appendChild(scriptTag);
-  }
+        const html = await fetch(actualRoute.pathHtml).then((data) => data.text());
+        document.getElementById("main-page").innerHTML = html;
 
-  // Changement du titre de la page
-  document.title = actualRoute.title + " - " + websiteName;
+        if (actualRoute.pathJS != "") {
+            var scriptTag = document.createElement("script");
+            scriptTag.setAttribute("type", "text/javascript");
+            scriptTag.setAttribute("src", actualRoute.pathJS);
+            document.querySelector("body").appendChild(scriptTag);
+        }
+
+        document.title = actualRoute.title + " - " + websiteName;
+        showAndHideElementForRoles();
+
+    } catch(error) {
+        console.error("Erreur de chargement :", error)
+    } finally {
+        loader.classList.add("hidden") // ✅ se déclenche toujours
+    }
 };
 
 // Fonction pour gérer les événements de routage (clic sur les liens)

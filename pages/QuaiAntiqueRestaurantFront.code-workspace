@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "QuaiAntiqueRestaurantFront",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "QuaiAntiqueRestaurantFront"
+	}
+}
