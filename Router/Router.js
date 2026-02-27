@@ -51,7 +51,7 @@ const LoadContentPage = async () => {
         document.getElementById("main-page").innerHTML = html;
 
         if (actualRoute.pathJS != "") {
-            var scriptTag = document.createElement("script");
+            let scriptTag = document.createElement("script");
             scriptTag.setAttribute("type", "text/javascript");
             scriptTag.setAttribute("src", actualRoute.pathJS);
             document.querySelector("body").appendChild(scriptTag);
