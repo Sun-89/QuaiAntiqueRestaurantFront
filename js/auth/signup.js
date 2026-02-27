@@ -8,11 +8,11 @@ const inputValidationPassword = document.getElementById("ValidatePasswordInput")
 const btnValidation = document.getElementById("btn-validation-inscription");
 const formInscription = document.getElementById("formulaireInscription")
 
-inputNom.addEventListener("keyup", validateForm); 
-inputPreNom.addEventListener("keyup", validateForm);
-inputMail.addEventListener("keyup", validateForm);
-inputPassword.addEventListener("keyup", validateForm);
-inputValidationPassword.addEventListener("keyup", validateForm);
+inputNom.addEventListener("input", validateForm); 
+inputPreNom.addEventListener("input", validateForm);
+inputMail.addEventListener("input", validateForm);
+inputPassword.addEventListener("input", validateForm);
+inputValidationPassword.addEventListener("input", validateForm);
 btnValidation.addEventListener("click", inscrireUtilisateur);
 
 
@@ -26,9 +26,11 @@ function validateForm(){
 
     if(nomOk && prenomOk && mailOk && passwordOk && passwordConfirmOk){
         btnValidation.disabled = false;
+        btnValidation.style.cursor = "pointer";
     }
     else{
         btnValidation.disabled = true;
+        btnValidation.style.cursor = "not-allowed";
     }
 }
 
@@ -50,7 +52,7 @@ function validateMail(input){
 }
 
 function validateConfirmationPassword(inputPwd, inputConfirmPwd){
-    if(inputPwd.value == inputConfirmPwd.value){
+    if(inputPwd.value !== "" && inputPwd.value === inputConfirmPwd.value){
         inputConfirmPwd.classList.add("is-valid");
         inputConfirmPwd.classList.remove("is-invalid");
         return true;
@@ -111,8 +113,18 @@ function inscrireUtilisateur(){
         redirect: 'follow'
     };
 
-    fetch("http://127.0.0.1:8000/api/registration", requestOptions)
-    .then((response) => response.json())
-    .then((result) => console.log(result))
+    fetch(apiUrl+"registration", requestOptions)
+    .then((response) => {
+        if(response.ok){
+        return response.json();
+        }
+        else{
+            alert("Erreur lors de l'inscription");
+        }
+    })
+    .then(result =>  {
+        alert("Bonjour "+dataForm.get("prenom")+", vous etes maintenant inscrit, vous pouvez vous connecter")
+        document.location.href="/signin"
+    })
     .catch((error) => console.error(error));
 }
