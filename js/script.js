@@ -2,7 +2,7 @@
 const tokenCookieName = "accesstoken";
 const signoutBtn =document.getElementById("signout-btn");
 const roleCookieName ="role";
-const apiUrl = "http://127.0.0.1:8000/api/";
+const apiUrl = "http://127.0.0.1:8001/api/";
 
 signoutBtn.addEventListener("click", signout);
 
@@ -50,7 +50,7 @@ function eraseCookie(name) {
 }
 
 function isConnected(){
-    return !(getToken() == null || getToken == undefined);
+    return getToken() != null && getToken() != undefined;
 }
 
 
@@ -62,35 +62,33 @@ connected (admin ou client)
 */
 
 function showAndHideElementForRoles(){
-    const userConnected =isConnected();
+    const userConnected = isConnected();
     const role = getRole();
 
     let allElementsToEdit = document.querySelectorAll('[data-show]');
 
-    allElementsToEdit.forEach(element =>{
+    allElementsToEdit.forEach(element => {
         switch(element.dataset.show){
             case 'disconnected':
-                if(userConnected){
-                    element.classList.add("d-none");
-                }
+                if(userConnected) element.classList.add("d-none");
+                else element.classList.remove("d-none"); // Pense à remove si on se déconnecte !
                 break;
             case 'connected':
-                if(!userConnected){
-                    element.classList.add("d-none");
-                }
+                if(!userConnected) element.classList.add("d-none");
+                else element.classList.remove("d-none");
                 break;
             case 'admin':
-                if(!userConnected || role != "ROLE_ADMIN"){
-                    element.classList.add("d-none");
-                }
+                if(!userConnected || role !== "ROLE_ADMIN") element.classList.add("d-none");
+                else element.classList.remove("d-none");
                 break;
             case 'client':
-                if(!userConnected || role != "ROLE_USER"){
+                // Ici, on vérifie ROLE_USER car c'est ce que Symfony envoie
+                if(!userConnected || (role !== "ROLE_USER" && role !== "client")) {
                     element.classList.add("d-none");
+                } else {
+                    element.classList.remove("d-none");
                 }
                 break;
-            
-
         }
     })
 }
@@ -99,4 +97,51 @@ function sanitizeHtml(text){
     const tempHtml = document.createElement('div');
     tempHtml.textContent = text;
     return tempHtml.innerHTML;
+}
+
+function getInfoUser(){
+    console.log("recuperation des infos utilisateur ...");
+
+    let myHeaders = new Headers();
+    myHeaders.append("X-AUTH-TOKEN", getToken());
+
+    let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(apiUrl + "account/me", requestOptions)
+        .then(response =>{
+            if(response.ok){
+                return response.json();
+            } else {
+                console.log("Erreur lors de la récupération des infos utilisateur");
+            }
+        })
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => console.log('erreur lors de la récupération des infos utilisateur', error))
+}
+
+// Dans ton fichier script.js (ou là où tu as ton bouton de déconnexion)
+const btnSignout = document.getElementById("btn-signout"); // Assure-toi de l'ID
+
+if(btnSignout){
+    btnSignout.addEventListener("click", (e) => {
+        e.preventDefault();
+        
+        // 1. On supprime le token et les infos
+        eraseToken(); 
+        
+        // 2. On redirige vers l'accueil en utilisant le routeur
+        const dummyEvent = { 
+            preventDefault: () => {}, 
+            target: { href: window.location.origin + "/" } 
+        };
+        route(dummyEvent); 
+        
+        console.log("Utilisateur déconnecté, redirection vers l'accueil.");
+    });
 }

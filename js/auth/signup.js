@@ -124,7 +124,14 @@ function inscrireUtilisateur(){
     })
     .then(result =>  {
         alert(`Bonjour ${inputPreNom.value}, vous etes maintenant inscrit, vous pouvez vous connecter`)
-        document.location.href="/signin"
+        window.history.pushState({}, "", "/signin");
+        if (typeof showPageHierarchy === 'function') {
+            showPageHierarchy(); 
+        } else {
+            // Si tu n'es pas sûr du nom de la fonction, 
+            // cette solution de secours forcera le retour à l'index (qui lui fonctionne)
+            window.location.replace("/");
+        }
     })
     .catch((error) => console.error(error));
 }

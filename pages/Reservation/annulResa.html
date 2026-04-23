@@ -7,21 +7,24 @@
 <div class="container mt-4">
     <p class="text-center">Êtes-vous sûr de vouloir annuler la réservation suivante ?</p>
 
-    <div class="allreservations">
-        <a href="#">
-            <span>12/05/2023</span> |
-            <span>12:10</span> |
-            <span>5 personnes</span> |
-            <span>Pas d'allergies</span>
-        </a>
+    <div id="reservation-details" class="card mx-auto shadow-sm" style="max-width: 500px;">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-3">Détails de la réservation</h5>
+            <p class="card-text">
+                <strong>Date :</strong> <span id="displayDate">Chargement...</span><br>
+                <strong>Heure :</strong> <span id="displayHour">...</span><br>
+                <strong>Personnes :</strong> <span id="displayConvives">...</span><br>
+                <strong>Allergies :</strong> <span id="displayAllergies">...</span>
+            </p>
+        </div>
     </div>
 
-    <div class="alert alert-warning text-center mt-3">
+    <div class="alert alert-warning text-center mt-3 mx-auto" style="max-width: 500px;">
         ⚠️ Cette action est irréversible.
     </div>
 
-    <div class="text-center mt-4">
-        <a href="/allResa" class="btn btn-primary">Retour à mes réservations</a>
-        <button class="btn btn-danger" onclick="confirmerAnnulation()">Annuler la réservation</button>
+    <div class="text-center mt-4 mb-5">
+        <a href="/allResa" class="btn btn-secondary" onclick="route(event)">Retour</a>
+        <button id="btn-confirm-annul" class="btn btn-danger">Confirmer l'annulation</button>
     </div>
 </div>

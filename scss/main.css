@@ -12086,4 +12086,21 @@ p {
 
 #loader.hidden {
   display: none;
+}
+
+/* On définit un cadre fixe pour les images de la galerie */
+.galerie-image-container {
+  width: 100%;
+  height: 250px; /* Tu peux ajuster la hauteur ici */
+  overflow: hidden;
+  border-radius: 8px 8px 0 0; /* Optionnel : arrondir les coins du haut */
+}
+
+.galerie-image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover; /* MAGIE : L'image remplit le cadre sans être écrasée */
+  -o-object-position: center;
+     object-position: center; /* Centre l'image dans son cadre */
 }/*# sourceMappingURL=main.css.map */
